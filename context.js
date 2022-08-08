@@ -18,6 +18,8 @@ module.exports = {
   createNamespace: createNamespace,
   destroyNamespace: destroyNamespace,
   reset: reset,
+  init: init,
+  destroy: destroy,
   ERROR_SYMBOL: ERROR_SYMBOL
 };
 
@@ -29,6 +31,7 @@ function Namespace(name) {
   this.id = null;
   this._contexts = new Map();
   this._indent = 0;
+  this.hook = null;
 }
 
 Namespace.prototype.set = function set(key, value) {
@@ -427,6 +430,7 @@ function createNamespace(name) {
 
   hook.enable();
 
+  namespace.hook = hook;
   process.namespaces[name] = namespace;
   return namespace;
 }
@@ -437,7 +441,8 @@ function destroyNamespace(name) {
   assert.ok(namespace, 'can\'t delete nonexistent namespace! "' + name + '"');
   assert.ok(namespace.id, 'don\'t assign to process.namespaces directly! ' + util.inspect(namespace));
 
-  process.namespaces[name] = null;
+  namespace.hook.disable();
+  delete process.namespaces[name];
 }
 
 function reset() {
@@ -447,10 +452,21 @@ function reset() {
       destroyNamespace(name);
     });
   }
-  process.namespaces = Object.create(null);
+  init();
 }
 
-process.namespaces = {};
+function destroy() {
+  reset();
+  delete process.namespaces;
+}
+
+function init() {
+  if (!process.namespaces) {
+    process.namespaces = Object.create(null);
+  }
+}
+
+init();
 
 //const fs = require('fs');
 function debug2(...args) {

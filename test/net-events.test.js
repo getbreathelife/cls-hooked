@@ -8,7 +8,7 @@ const cls = require('../index.js');
 
 describe('cls with net connection', () => {
 
-  let namespace = cls.createNamespace('net');
+  let namespace = cls.createNamespace('net-events-test');
   let testValue1;
   let testValue2;
   let testValue3;
