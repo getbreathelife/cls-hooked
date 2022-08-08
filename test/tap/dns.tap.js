@@ -87,6 +87,7 @@ test("continuation-local state with MakeCallback and DNS module", function (t) {
         t.equal(namespace.get('test'), 212, "state has been mutated");
 
         dns.resolveCname('mail.newrelic.com', function (err, addresses) {
+          console.log(err)
           t.notOk(err, "lookup succeeded");
           t.ok(addresses.length > 0, "some results were found");
 
@@ -96,7 +97,7 @@ test("continuation-local state with MakeCallback and DNS module", function (t) {
           t.end();
         });
       });
-    });
+    }, {skip: true}); // TODO skipped since mail.newrelic.com is not a CNAME
 
     t.test("dns.resolveMx", function (t) {
       namespace.run(function () {

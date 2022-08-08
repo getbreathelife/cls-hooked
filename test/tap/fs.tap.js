@@ -468,7 +468,7 @@ test("continuation-local state with MakeCallback and fs module", function (t) {
           t.equal(namespace.get('test'), 'unlink',
             "mutated state has persisted to fs.unlink's callback");
 
-          t.notOk(fs.exists(FILENAME), "file should be gone");
+          t.notOk(fs.existsSync(FILENAME), "file should be gone");
           t.end();
         });
       });
