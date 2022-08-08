@@ -20,7 +20,9 @@ describe('cls with net connection 2', function() {
       function namespaceRun1(ctx) {
         namespace.set(keyName, TEST_VALUE);
         expect(namespace.get(keyName)).equal(ctx.netTest2, 'context should be the same');
-        const server = net.createServer();
+        const server = net.createServer((socket) => {
+          namespace.bindEmitter(socket);
+        });
 
         server.on('connection', function OnServerConnection(socket) {
             expect(namespace.get(keyName)).equal(TEST_VALUE, 'state has been mutated');

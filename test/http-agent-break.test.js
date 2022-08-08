@@ -67,7 +67,7 @@ describe('cls with http Agent', () => {
     function httpGetRequest(cb) {
 
       //https://github.com/othiym23/node-continuation-local-storage/issues/71
-      namespace.bindEmitter(superagent.Request.super_.super_.prototype);
+      namespace.bindEmitter(superagent.Request.prototype);
 
       var req = superagent['get']('http://www.google.com');
 
