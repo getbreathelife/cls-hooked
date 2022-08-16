@@ -1,5 +1,5 @@
 {
-  "name": "@getbreathelife/cls-hooked",
+  "name": "@breathelife/cls-hooked",
   "version": "4.3.0",
   "description": "CLS using AsynWrap instead of async-listener - Node >= 4.7.0",
   "main": "index.js",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/getbreathelife/cls-hooked.git"
+    "url": "git+https://github.com/getbreathelife/cls-hooked.git"
   },
   "keywords": [
     "threading",
@@ -48,5 +48,12 @@
     "tap": "^10.7.0",
     "tap-mocha-reporter": "3.0.6"
   },
-  "false": {}
+  "false": {},
+  "bugs": {
+    "url": "https://github.com/getbreathelife/cls-hooked/issues"
+  },
+  "homepage": "https://github.com/getbreathelife/cls-hooked#readme",
+  "directories": {
+    "test": "test"
+  }
 }
